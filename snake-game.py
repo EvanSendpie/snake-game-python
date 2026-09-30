@@ -28,6 +28,7 @@ food.penup()
 food.goto(0,100)
 food.direction = "stop"
 
+# Fungsi pokoknya
 def go_up():
     head.direction = "up"
     
@@ -64,16 +65,38 @@ wn.onkeypress(go_down, "s")
 wn.onkeypress(go_left, "a")
 wn.onkeypress(go_right, "d")
 
+segments = []
 
 # Main game loop
 while True:
     wn.update()
     
+    # Cek tabrakan dengan makanan
     if head.distance(food) < 20:
         # Taruh makanan ke random posisi
         x = random.randint(-290,290)
         y = random.randint(-290,290)
         food.goto(x, y)
+        
+        # Nambah segment
+        new_segment = turtle.Turtle()
+        new_segment.speed(0)
+        new_segment.shape("square")
+        new_segment.color("grey")
+        new_segment.penup()
+        segments.append(new_segment)
+    
+    # Memindahkan segment akhir ke awal 
+    for index in range(len(segments)-1,0,-1):
+        x = segments[index-1].xcor()
+        y = segments[index-1].ycor()
+        segments[index].goto(x, y)
+    
+    # Move segment 0 to where the head is (gatau indonya)
+    if len(segments) > 0:
+        x = head.xcor()
+        y = head.ycor()
+        segments[0].goto(x,y)
     
     move()
     

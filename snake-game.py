@@ -26,7 +26,6 @@ food.shape("circle")
 food.color("red")
 food.penup()
 food.goto(0,100)
-food.direction = "stop"
 
 # Fungsi pokoknya
 def go_up():

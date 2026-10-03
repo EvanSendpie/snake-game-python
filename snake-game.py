@@ -14,6 +14,14 @@ wn.bgcolor("grey")
 wn.setup(width=600, height=600)
 wn.tracer(0) # Buat matiin screen updatenya
 
+# Makanan Uler
+food = turtle.Turtle()
+food.speed(0)
+food.shape("circle")
+food.color("red")
+food.penup()
+food.goto(0,100)
+
 # Kepala uler
 head = turtle.Turtle()
 head.speed(0)
@@ -22,14 +30,6 @@ head.color("#355E3B")
 head.penup()
 head.goto(0,0)
 head.direction = "stop"
-
-# Makanan Uler
-food = turtle.Turtle()
-food.speed(0)
-food.shape("circle")
-food.color("red")
-food.penup()
-food.goto(0,100)
 
 segments = []
 
@@ -89,7 +89,7 @@ while True:
     wn.update()
     
     # Ngecek tabrakan dengan border
-    if head.xcor()>290 or head.xcor()<-290 or head.ycor()>290 or head.ycor()<-290:
+    if head.xcor()> 280 or head.xcor()< -280 or head.ycor()> 280 or head.ycor()< -290:
         time.sleep(1)
         head.goto(0,0)
         head.direction = "stop"
@@ -117,7 +117,7 @@ while True:
     if head.distance(food) < 20:
         # Taruh makanan ke random posisi
         x = random.randrange(-280, 281, 20)
-        y = random.randrange(-280, 281, 20)
+        y = random.randrange(-280, 221, 20)
         food.goto(x, y)
         
         # Nambah segment

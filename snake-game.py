@@ -98,10 +98,21 @@ while True:
         
         # Sembunyikan segment
         for segment in segments:
-            segment.got0(1000, 1000)
+            segment.goto(1000, 1000)
         
         # Bersihkan segments list
         segments.clear()
+        
+        # Reset skor
+        score = 0
+        
+        # Reset delay
+        delay = 0.1
+        
+        # Update display skor
+        pen.clear() 
+        pen.write("SCORE: {}  HIGH SCORE:  {}".format(score, high_score), align="center", font =("Courier", 24, "normal"))
+            
     
     # Cek tabrakan dengan makanan
     if head.distance(food) < 20:
@@ -118,8 +129,17 @@ while True:
         new_segment.penup()
         segments.append(new_segment)
         
+        # Kurangin delay (naikin kesulitan tiap makan)
+        delay -= 0.001
+        
         # Naikin skor
-        score += 10
+        score += 1
+        
+        if score > high_score:
+            high_score = score
+           
+        pen.clear() 
+        pen.write("SCORE: {}  HIGH SCORE:  {}".format(score, high_score), align="center", font =("Courier", 24, "normal"))
     
     # Memindahkan segment akhir ke awal 
     for index in range(len(segments)-1,0,-1):
@@ -145,6 +165,19 @@ while True:
             # Sembunyikan segment
             for segment in segments:
                 segment.goto(1000, 1000)
+            
+            # Bersihkan segments list
+            segments.clear()
+            
+            # Reset skor
+            score = 0
+            
+            # Reset delay
+            delay = 0.1
+            
+            # Update display skor
+            pen.clear() 
+            pen.write("SCORE: {}  HIGH SCORE:  {}".format(score, high_score), align="center", font =("Courier", 24, "normal"))
     
     time.sleep(delay)
 

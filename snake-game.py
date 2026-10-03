@@ -1,6 +1,9 @@
 import turtle
+from pathlib import Path
 import time
 import random
+
+BASE_DIR = Path(__file__).resolve().parent
 
 delay = 0.1
 
@@ -10,6 +13,9 @@ high_score = 0
 
 wn = turtle.Screen()
 wn.title("Ular Kadut Khas Lowokwaru")
+wn.getcanvas().winfo_toplevel().iconbitmap(
+    str(BASE_DIR / "assets" / "snake-face.ico")
+)
 wn.bgcolor("grey")
 wn.setup(width=600, height=600)
 wn.tracer(0) # Buat matiin screen updatenya

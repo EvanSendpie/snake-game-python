@@ -4,6 +4,10 @@ import random
 
 delay = 0.1
 
+# Skor
+score = 0
+high_score = 0
+
 wn = turtle.Screen()
 wn.title("Ular Kadut Khas Lowokwaru")
 wn.bgcolor("cyan")
@@ -26,6 +30,18 @@ food.shape("circle")
 food.color("red")
 food.penup()
 food.goto(0,100)
+
+segments = []
+
+# Pen
+pen = turtle.Turtle()
+pen. speed(0)
+pen.shape("square")
+pen.color("white")
+pen.penup()
+pen.hideturtle()
+pen.goto(0, 260)
+pen.write("SCORE: 0  HIGH SCORE: 0", align= "center", font =("Courier", 24, "normal"))
 
 # Fungsi pokoknya
 def go_up():
@@ -101,6 +117,9 @@ while True:
         new_segment.color("grey")
         new_segment.penup()
         segments.append(new_segment)
+        
+        # Naikin skor
+        score += 10
     
     # Memindahkan segment akhir ke awal 
     for index in range(len(segments)-1,0,-1):

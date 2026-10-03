@@ -10,7 +10,7 @@ high_score = 0
 
 wn = turtle.Screen()
 wn.title("Ular Kadut Khas Lowokwaru")
-wn.bgcolor("cyan")
+wn.bgcolor("grey")
 wn.setup(width=600, height=600)
 wn.tracer(0) # Buat matiin screen updatenya
 
@@ -18,7 +18,7 @@ wn.tracer(0) # Buat matiin screen updatenya
 head = turtle.Turtle()
 head.speed(0)
 head.shape("square")
-head.color("black")
+head.color("#355E3B")
 head.penup()
 head.goto(0,0)
 head.direction = "stop"
@@ -35,7 +35,7 @@ segments = []
 
 # Pen
 pen = turtle.Turtle()
-pen. speed(0)
+pen.speed(0)
 pen.shape("square")
 pen.color("white")
 pen.penup()
@@ -65,17 +65,17 @@ def move():
         y = head.ycor()
         head.sety(y + 20)
         
-    if head.direction == "down":
-            y = head.ycor()
-            head.sety(y - 20)
+    elif head.direction == "down":
+        y = head.ycor()
+        head.sety(y - 20)
             
-    if head.direction == "left":
-            x = head.xcor()
-            head.setx(x - 20)
+    elif head.direction == "left":
+        x = head.xcor()
+        head.setx(x - 20)
             
-    if head.direction == "right":
-            x = head.xcor()
-            head.setx(x + 20)
+    elif head.direction == "right":
+        x = head.xcor()
+        head.setx(x + 20)
             
 # Keybind
 wn.listen()
@@ -83,8 +83,6 @@ wn.onkeypress(go_up, "w")
 wn.onkeypress(go_down, "s")
 wn.onkeypress(go_left, "a")
 wn.onkeypress(go_right, "d")
-
-segments = []
 
 # Main game loop
 while True:
@@ -112,25 +110,26 @@ while True:
         # Update display skor
         pen.clear() 
         pen.write("SCORE: {}  HIGH SCORE:  {}".format(score, high_score), align="center", font =("Courier", 24, "normal"))
-            
+        
+        continue
     
     # Cek tabrakan dengan makanan
     if head.distance(food) < 20:
         # Taruh makanan ke random posisi
-        x = random.randint(-290,290)
-        y = random.randint(-290,290)
+        x = random.randrange(-280, 281, 20)
+        y = random.randrange(-280, 281, 20)
         food.goto(x, y)
         
         # Nambah segment
         new_segment = turtle.Turtle()
         new_segment.speed(0)
         new_segment.shape("square")
-        new_segment.color("grey")
+        new_segment.color("#568203")
         new_segment.penup()
         segments.append(new_segment)
         
         # Kurangin delay (naikin kesulitan tiap makan)
-        delay -= 0.001
+        delay = max(0.03, delay - 0.001)
         
         # Naikin skor
         score += 1
@@ -178,7 +177,9 @@ while True:
             # Update display skor
             pen.clear() 
             pen.write("SCORE: {}  HIGH SCORE:  {}".format(score, high_score), align="center", font =("Courier", 24, "normal"))
+
+            continue
     
     time.sleep(delay)
 
-wn.mainloop()
+# wn.mainloop()
